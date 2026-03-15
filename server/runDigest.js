@@ -2,8 +2,10 @@ require('dotenv').config();
 const admin = require('firebase-admin');
 const cron = require('node-cron');
 const nodemailer = require('nodemailer');
+const express = require('express');
 
-// 1. Initialize Firebase Admin
+const app = express();
+const PORT = process.env.PORT || 8080;
 // WARNING: You must download your serviceAccountKey.json from Firebase Console -> Project Settings -> Service Accounts
 // and place it in this server/ directory for this to work.
 let db;
@@ -150,4 +152,10 @@ cron.schedule('0 0 * * 0', () => {
 // Optional: for manual testing, uncomment the line below to run it once immediately on boot:
 // generateAndSendDigests();
 
-console.log("✨ Server worker successfully started and listening for schedule!");
+app.get('/', (req, res) => {
+    res.send('HomeLedger Email Worker is running and listening for schedules.');
+});
+
+app.listen(PORT, () => {
+    console.log(`✨ Server worker successfully started and listening on port ${PORT} for schedule!`);
+});

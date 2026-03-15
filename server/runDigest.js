@@ -148,6 +148,6 @@ cron.schedule('0 0 * * 0', () => {
 });
 
 // Optional: for manual testing, uncomment the line below to run it once immediately on boot:
-generateAndSendDigests();
+// generateAndSendDigests();
 
 console.log("✨ Server worker successfully started and listening for schedule!");
